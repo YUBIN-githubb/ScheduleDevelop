@@ -48,4 +48,9 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }
     }
+
+    public void deleteUser (Long id) {
+        User toDeleteUser = userRepository.findByIdOrElseThrow(id);
+        userRepository.delete(toDeleteUser);
+    }
 }
