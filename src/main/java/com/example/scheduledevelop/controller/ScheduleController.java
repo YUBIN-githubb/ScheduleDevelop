@@ -2,14 +2,15 @@ package com.example.scheduledevelop.controller;
 
 import com.example.scheduledevelop.dto.CreateScheduleRequestDto;
 import com.example.scheduledevelop.dto.CreateScheduleResponseDto;
+import com.example.scheduledevelop.dto.ScheduleResponseDto;
 import com.example.scheduledevelop.entity.Schedule;
 import com.example.scheduledevelop.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,10 +26,20 @@ public class ScheduleController {
         return ResponseEntity.ok(schedule);
     }
 
-
     //일정 전체 조회
+    @GetMapping
+    public ResponseEntity<List<ScheduleResponseDto>> findAll() {
+        List<ScheduleResponseDto> scheduleList = scheduleService.findAll();
+        return ResponseEntity.ok(scheduleList);
+    }
 
     //일정 단건 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> findById(@PathVariable Long id) {
+        ScheduleResponseDto findSchedule = scheduleService.findById(id);
+        return ResponseEntity.ok(findSchedule);
+    }
+
 
     //일정 수정
 

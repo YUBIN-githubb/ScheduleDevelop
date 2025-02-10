@@ -1,5 +1,6 @@
 package com.example.scheduledevelop.entity;
 
+import com.example.scheduledevelop.dto.ScheduleResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -31,5 +32,9 @@ public class Schedule extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public static ScheduleResponseDto toDto(Schedule schedule) {
+        return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getContents());
     }
 }
