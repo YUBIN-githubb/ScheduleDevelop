@@ -31,4 +31,8 @@ public class User extends BaseEntity{
     public static UserResponseDto toDto(User user) {
         return new UserResponseDto(user.getId(), user.getUsername(), user.getEmail());
     }
+
+    public void updateUsername(String username) {
+        this.username = username;
+    }
 }

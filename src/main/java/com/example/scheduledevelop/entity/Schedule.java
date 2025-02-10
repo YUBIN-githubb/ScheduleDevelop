@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
-@Table(name = "board")
+@Table(name = "schedule")
 @Getter
 public class Schedule extends BaseEntity {
 
@@ -36,5 +36,10 @@ public class Schedule extends BaseEntity {
 
     public static ScheduleResponseDto toDto(Schedule schedule) {
         return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getContents());
+    }
+
+    public void updateSchedule(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
     }
 }

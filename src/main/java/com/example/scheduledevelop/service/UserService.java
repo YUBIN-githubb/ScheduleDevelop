@@ -4,6 +4,7 @@ import com.example.scheduledevelop.dto.SignupResponseDto;
 import com.example.scheduledevelop.dto.UserResponseDto;
 import com.example.scheduledevelop.entity.User;
 import com.example.scheduledevelop.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class UserService {
         return new UserResponseDto(findUser.getId(), findUser.getUsername(), findUser.getEmail());
     }
 
+    @Transactional
     public UserResponseDto updateUsername(Long id, String username) {
         User findUser = userRepository.findByIdOrElseThrow(id);
 
@@ -43,7 +45,8 @@ public class UserService {
 
         //만약 새로운 username이 DB에 없다면 -> 수정 허용
         if(byUsername.isEmpty()){
-            return new UserResponseDto(findUser.getId(), username, findUser.getEmail());
+            findUser.updateUsername(username);
+            return new UserResponseDto(findUser.getId(), findUser.getUsername(), findUser.getEmail());
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }

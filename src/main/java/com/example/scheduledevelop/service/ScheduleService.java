@@ -6,6 +6,7 @@ import com.example.scheduledevelop.entity.Schedule;
 import com.example.scheduledevelop.entity.User;
 import com.example.scheduledevelop.repository.ScheduleRepository;
 import com.example.scheduledevelop.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +41,10 @@ public class ScheduleService {
         return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents());
     }
 
+    @Transactional
+    public ScheduleResponseDto updateSchedule (Long id, String title, String contents) {
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+        findSchedule.updateSchedule(title, contents);
+        return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents());
+    }
 }

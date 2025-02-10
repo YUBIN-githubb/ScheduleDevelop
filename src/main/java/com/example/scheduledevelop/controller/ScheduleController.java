@@ -3,6 +3,7 @@ package com.example.scheduledevelop.controller;
 import com.example.scheduledevelop.dto.CreateScheduleRequestDto;
 import com.example.scheduledevelop.dto.CreateScheduleResponseDto;
 import com.example.scheduledevelop.dto.ScheduleResponseDto;
+import com.example.scheduledevelop.dto.UpdateScheduleRequestDto;
 import com.example.scheduledevelop.entity.Schedule;
 import com.example.scheduledevelop.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +41,12 @@ public class ScheduleController {
         return ResponseEntity.ok(findSchedule);
     }
 
-
     //일정 수정
+    @PatchMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable Long id, @RequestBody UpdateScheduleRequestDto dto) {
+        ScheduleResponseDto schedule = scheduleService.updateSchedule(id, dto.getTitle(), dto.getContents());
+        return ResponseEntity.ok(schedule);
+    }
 
     //일정 삭제
 }
