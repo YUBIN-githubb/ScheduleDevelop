@@ -2,6 +2,7 @@ package com.example.scheduledevelop.controller;
 
 import com.example.scheduledevelop.dto.SignupRequestDto;
 import com.example.scheduledevelop.dto.SignupResponseDto;
+import com.example.scheduledevelop.dto.UpdateUsernameRequestDto;
 import com.example.scheduledevelop.dto.UserResponseDto;
 import com.example.scheduledevelop.entity.User;
 import com.example.scheduledevelop.repository.UserRepository;
@@ -39,6 +40,13 @@ public class UserController {
     public ResponseEntity<UserResponseDto> findById(@PathVariable Long id) {
         UserResponseDto findUser = userService.findById(id);
         return ResponseEntity.ok(findUser);
+    }
+
+    //유저이름 수정
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponseDto> updateUsername (@PathVariable Long id, @RequestBody UpdateUsernameRequestDto dto) {
+        UserResponseDto updateUser = userService.updateUsername(id, dto.getUsername());
+        return ResponseEntity.ok(updateUser);
     }
 
 }
