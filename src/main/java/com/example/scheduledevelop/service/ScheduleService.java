@@ -47,4 +47,9 @@ public class ScheduleService {
         findSchedule.updateSchedule(title, contents);
         return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents());
     }
+
+    public void deleteSchedule (Long id) {
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+        scheduleRepository.delete(findSchedule);
+    }
 }
