@@ -1,5 +1,6 @@
 package com.example.scheduledevelop.entity;
 
+import com.example.scheduledevelop.dto.UserResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -25,5 +26,9 @@ public class User extends BaseEntity{
     public User(String username, String email) {
         this.username = username;
         this.email = email;
+    }
+
+    public static UserResponseDto toDto(User user) {
+        return new UserResponseDto(user.getId(), user.getUsername(), user.getEmail());
     }
 }
