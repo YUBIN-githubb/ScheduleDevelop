@@ -1,5 +1,6 @@
 package com.example.scheduledevelop.service;
 
+import com.example.scheduledevelop.dto.LoginResponseDto;
 import com.example.scheduledevelop.dto.SignupResponseDto;
 import com.example.scheduledevelop.dto.UserResponseDto;
 import com.example.scheduledevelop.entity.User;
@@ -7,6 +8,7 @@ import com.example.scheduledevelop.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -55,5 +57,16 @@ public class UserService {
     public void deleteUser (Long id) {
         User toDeleteUser = userRepository.findByIdOrElseThrow(id);
         userRepository.delete(toDeleteUser);
+    }
+
+    public LoginResponseDto login(String email, String password) {
+        //받은 email과 password로 DB조회
+        Optional<User> findUser = userRepository.findByEmailAndPassword(email, password);
+        if (findUser.isEmpty()){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "일치하는 유저가 없습니다.");
+        }
+        User user = findUser.get();
+
+        return new LoginResponseDto(user.getId(), user.getUsername());
     }
 }
