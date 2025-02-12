@@ -8,6 +8,8 @@ import com.example.scheduledevelop.repository.ScheduleRepository;
 import com.example.scheduledevelop.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,21 +33,32 @@ public class ScheduleService {
 
     }
 
-    public List<ScheduleResponseDto> findAll() {
-        List<ScheduleResponseDto> scheduleList = scheduleRepository.findAll().stream().map(Schedule::toDto).toList();
-        return scheduleList;
+    public Page<ScheduleResponseDto> findAll(Pageable pageable) {
+        return scheduleRepository.findAll(pageable).map(Schedule::toDto);
     }
 
     public ScheduleResponseDto findById(Long id) {
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
-        return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents());
+        return new ScheduleResponseDto(
+                findSchedule.getId(),
+                findSchedule.getTitle(),
+                findSchedule.getContents(),
+                findSchedule.getCreatedAt(),
+                findSchedule.getUpdatedAt(),
+                findSchedule.getUser().getUsername());
     }
 
     @Transactional
     public ScheduleResponseDto updateSchedule (Long id, String title, String contents) {
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
         findSchedule.updateSchedule(title, contents);
-        return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents());
+        return new ScheduleResponseDto(
+                findSchedule.getId(),
+                findSchedule.getTitle(),
+                findSchedule.getContents(),
+                findSchedule.getCreatedAt(),
+                findSchedule.getUpdatedAt(),
+                findSchedule.getUser().getUsername());
     }
 
     public void deleteSchedule (Long id) {

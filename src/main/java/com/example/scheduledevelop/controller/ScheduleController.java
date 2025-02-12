@@ -7,6 +7,10 @@ import com.example.scheduledevelop.dto.UpdateScheduleRequestDto;
 import com.example.scheduledevelop.entity.Schedule;
 import com.example.scheduledevelop.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +33,15 @@ public class ScheduleController {
 
     //일정 전체 조회
     @GetMapping
-    public ResponseEntity<List<ScheduleResponseDto>> findAll() {
-        List<ScheduleResponseDto> scheduleList = scheduleService.findAll();
-        return ResponseEntity.ok(scheduleList);
+    public ResponseEntity<Page<ScheduleResponseDto>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "updatedAt") String sortBy
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).descending());
+        Page<ScheduleResponseDto> schedulePage = scheduleService.findAll(pageable);
+
+        return ResponseEntity.ok(schedulePage);
     }
 
     //일정 단건 조회

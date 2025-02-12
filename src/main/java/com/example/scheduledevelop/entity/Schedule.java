@@ -39,7 +39,13 @@ public class Schedule extends BaseEntity {
     }
 
     public static ScheduleResponseDto toDto(Schedule schedule) {
-        return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getContents());
+        return new ScheduleResponseDto(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContents(),
+                schedule.getCreatedAt(),
+                schedule.getUpdatedAt(),
+                schedule.getUser().getUsername());
     }
 
     public void updateSchedule(String title, String contents) {
