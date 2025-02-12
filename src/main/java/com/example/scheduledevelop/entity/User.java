@@ -3,6 +3,7 @@ package com.example.scheduledevelop.entity;
 import com.example.scheduledevelop.dto.UserResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.NotFound;
 
 @Entity
 @Table(name = "user")
@@ -19,13 +20,17 @@ public class User extends BaseEntity{
     @Column(unique = true, nullable = false)
     private String email;
 
+    // 회원가입 요청 dto에 password 추가
+    private String password;
+
     public User() {
 
     }
 
-    public User(String username, String email) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     public static UserResponseDto toDto(User user) {

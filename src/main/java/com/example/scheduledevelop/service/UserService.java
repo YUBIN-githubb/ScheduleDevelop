@@ -19,8 +19,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public SignupResponseDto createUser(String username, String email) {
-        User user = new User(username, email);
+    public SignupResponseDto createUser(String username, String email, String password) {
+        User user = new User(username, email, password);
         User savedUser = userRepository.save(user);
 
         return new SignupResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
