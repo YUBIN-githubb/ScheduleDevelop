@@ -2,6 +2,8 @@ package com.example.scheduledevelop.entity;
 
 import com.example.scheduledevelop.dto.ScheduleResponseDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 @Entity
@@ -14,6 +16,8 @@ public class Schedule extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank
+    @Size(min = 1, max = 20)
     private String title;
 
     @Column(columnDefinition = "longtext")

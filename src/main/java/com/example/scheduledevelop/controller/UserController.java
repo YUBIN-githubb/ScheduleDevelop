@@ -26,7 +26,7 @@ public class UserController {
 
     //유저 생성
     @PostMapping("/signup")
-    public ResponseEntity<SignupResponseDto> createUser(@RequestBody SignupRequestDto dto) {
+    public ResponseEntity<SignupResponseDto> createUser(@Valid @RequestBody SignupRequestDto dto) {
         SignupResponseDto user = userService.createUser(dto.getUsername(), dto.getEmail(), dto.getPassword());
         return ResponseEntity.ok(user);
     }

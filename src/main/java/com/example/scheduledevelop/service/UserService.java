@@ -1,5 +1,6 @@
 package com.example.scheduledevelop.service;
 
+import com.example.scheduledevelop.config.PasswordEncoder;
 import com.example.scheduledevelop.dto.LoginResponseDto;
 import com.example.scheduledevelop.dto.SignupResponseDto;
 import com.example.scheduledevelop.dto.UserResponseDto;
@@ -20,9 +21,12 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public SignupResponseDto createUser(String username, String email, String password) {
-        User user = new User(username, email, password);
+
+        String encodedPassword = passwordEncoder.encode(password);
+        User user = new User(username, email, encodedPassword);
         User savedUser = userRepository.save(user);
 
         return new SignupResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
@@ -61,12 +65,16 @@ public class UserService {
 
     public LoginResponseDto login(String email, String password) {
         //받은 email과 password로 DB조회
-        Optional<User> findUser = userRepository.findByEmailAndPassword(email, password);
-        if (findUser.isEmpty()){
-            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "일치하는 유저가 없습니다.");
+        Optional<User> findUser = userRepository.findByEmail(email);
+        if(findUser.isEmpty()){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Invalid email or password");
         }
-        User user = findUser.get();
 
-        return new LoginResponseDto(user.getId(), user.getUsername());
+        //입력된 비밀번호와 암호화되어 DB에 저장된 비밀번호 비교
+        if(!passwordEncoder.matches(password, findUser.get().getPassword())) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Invalid email or password");
+        }
+
+        return new LoginResponseDto(findUser.get().getId(), findUser.get().getUsername());
     }
 }
