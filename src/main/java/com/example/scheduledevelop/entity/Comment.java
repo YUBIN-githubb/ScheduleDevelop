@@ -1,9 +1,8 @@
 package com.example.scheduledevelop.entity;
 
-import com.example.scheduledevelop.dto.CommentResponseDto;
+import com.example.scheduledevelop.dto.CommentDto.CommentResponseDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity

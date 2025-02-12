@@ -1,4 +1,4 @@
-package com.example.scheduledevelop.dto;
+package com.example.scheduledevelop.dto.CommentDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

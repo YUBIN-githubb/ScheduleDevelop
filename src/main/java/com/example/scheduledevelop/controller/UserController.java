@@ -1,18 +1,21 @@
 package com.example.scheduledevelop.controller;
 
 import com.example.scheduledevelop.common.Const;
-import com.example.scheduledevelop.dto.*;
-import com.example.scheduledevelop.entity.User;
-import com.example.scheduledevelop.repository.UserRepository;
+import com.example.scheduledevelop.dto.LoginDto.LoginRequestDto;
+import com.example.scheduledevelop.dto.LoginDto.LoginResponseDto;
+import com.example.scheduledevelop.dto.SignupDto.SignupRequestDto;
+import com.example.scheduledevelop.dto.SignupDto.SignupResponseDto;
+import com.example.scheduledevelop.dto.UserDto.UpdateUsernameRequestDto;
+import com.example.scheduledevelop.dto.UserDto.UserResponseDto;
 import com.example.scheduledevelop.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -80,7 +83,7 @@ public class UserController {
     //로그아웃
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
-        // 현재 세션 가져오기
+        // 현재 세션 가져오기, 없으면 false
         HttpSession session = request.getSession(false);
 
         // 세션이 존재하면 무효화

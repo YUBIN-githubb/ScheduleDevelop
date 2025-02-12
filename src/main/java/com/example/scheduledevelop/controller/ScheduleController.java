@@ -1,10 +1,9 @@
 package com.example.scheduledevelop.controller;
 
-import com.example.scheduledevelop.dto.CreateScheduleRequestDto;
-import com.example.scheduledevelop.dto.CreateScheduleResponseDto;
-import com.example.scheduledevelop.dto.ScheduleResponseDto;
-import com.example.scheduledevelop.dto.UpdateScheduleRequestDto;
-import com.example.scheduledevelop.entity.Schedule;
+import com.example.scheduledevelop.dto.ScheduleDto.CreateScheduleRequestDto;
+import com.example.scheduledevelop.dto.ScheduleDto.CreateScheduleResponseDto;
+import com.example.scheduledevelop.dto.ScheduleDto.ScheduleResponseDto;
+import com.example.scheduledevelop.dto.ScheduleDto.UpdateScheduleRequestDto;
 import com.example.scheduledevelop.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,10 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +27,7 @@ public class ScheduleController {
         return ResponseEntity.ok(schedule);
     }
 
-    //일정 전체 조회
+    //일정 전체 조회 (페이지네이션)
     @GetMapping
     public ResponseEntity<Page<ScheduleResponseDto>> findAll(
             @RequestParam(defaultValue = "0") int page,

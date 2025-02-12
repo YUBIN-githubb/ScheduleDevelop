@@ -1,7 +1,7 @@
 package com.example.scheduledevelop.controller;
 
-import com.example.scheduledevelop.dto.CreateCommentRequestDto;
-import com.example.scheduledevelop.dto.CommentResponseDto;
+import com.example.scheduledevelop.dto.CommentDto.CreateCommentRequestDto;
+import com.example.scheduledevelop.dto.CommentDto.CommentResponseDto;
 import com.example.scheduledevelop.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

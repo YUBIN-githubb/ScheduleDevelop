@@ -1,11 +1,11 @@
-package com.example.scheduledevelop.dto;
+package com.example.scheduledevelop.dto.SignupDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UserResponseDto {
+public class SignupResponseDto {
 
     private Long id;
 

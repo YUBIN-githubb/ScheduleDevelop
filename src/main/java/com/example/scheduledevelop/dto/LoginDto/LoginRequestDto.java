@@ -1,4 +1,4 @@
-package com.example.scheduledevelop.dto;
+package com.example.scheduledevelop.dto.LoginDto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

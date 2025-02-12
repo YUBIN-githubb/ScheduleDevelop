@@ -1,6 +1,6 @@
 package com.example.scheduledevelop.entity;
 
-import com.example.scheduledevelop.dto.ScheduleResponseDto;
+import com.example.scheduledevelop.dto.ScheduleDto.ScheduleResponseDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

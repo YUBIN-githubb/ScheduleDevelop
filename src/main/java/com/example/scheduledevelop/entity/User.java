@@ -1,13 +1,11 @@
 package com.example.scheduledevelop.entity;
 
-import com.example.scheduledevelop.dto.UserResponseDto;
+import com.example.scheduledevelop.dto.UserDto.UserResponseDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.hibernate.annotations.NotFound;
 
 @Entity
 @Table(name = "user")

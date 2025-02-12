@@ -1,15 +1,13 @@
-package com.example.scheduledevelop.dto;
+package com.example.scheduledevelop.dto.ScheduleDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreateScheduleRequestDto {
+public class UpdateScheduleRequestDto {
 
     private String title;
 
     private String contents;
-
-    private String username;
 }

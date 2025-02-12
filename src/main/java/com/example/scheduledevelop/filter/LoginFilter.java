@@ -37,11 +37,10 @@ public class LoginFilter implements Filter {
             log.info("로그인 성공 - 세션 ID: {}", session.getId());
         }
 
-        log.info("로그인 성공");
-
         chain.doFilter(request, response);
     }
 
+    //인증을 제외할 url인지 확인
     private boolean isWhiteList(String requestURI) {
         return PatternMatchUtils.simpleMatch(WHITE_LIST, requestURI);
     }

@@ -1,8 +1,7 @@
 package com.example.scheduledevelop.service;
 
-import com.example.scheduledevelop.dto.CommentResponseDto;
+import com.example.scheduledevelop.dto.CommentDto.CommentResponseDto;
 import com.example.scheduledevelop.entity.Comment;
-import com.example.scheduledevelop.entity.Schedule;
 import com.example.scheduledevelop.repository.CommentRepository;
 import com.example.scheduledevelop.repository.ScheduleRepository;
 import com.example.scheduledevelop.repository.UserRepository;
@@ -19,6 +18,7 @@ public class CommentService {
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
 
+    //댓글 생성
     @Transactional
     public CommentResponseDto createComment (Long schedule_id, String comment, String username) {
         Comment createdComment = new Comment(comment);
@@ -33,6 +33,7 @@ public class CommentService {
                 createdComment.getUpdatedAt());
     }
 
+    //댓글 조회 (페이지네이션)
     public Page<CommentResponseDto> findAll (Pageable pageable) {
         return commentRepository.findAll(pageable).map(Comment::toDto);
     }
