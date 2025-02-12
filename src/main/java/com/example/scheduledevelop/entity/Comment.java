@@ -1,5 +1,6 @@
 package com.example.scheduledevelop.entity;
 
+import com.example.scheduledevelop.dto.CommentResponseDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,13 @@ public class Comment extends BaseEntity{
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+
+    public static CommentResponseDto toDto(Comment comment) {
+        return new CommentResponseDto(
+                comment.getComment(),
+                comment.getUser().getUsername(),
+                comment.getUpdatedAt()
+        );
     }
 }

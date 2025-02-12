@@ -8,6 +8,8 @@ import com.example.scheduledevelop.repository.ScheduleRepository;
 import com.example.scheduledevelop.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,5 +31,9 @@ public class CommentService {
                 createdComment.getComment(),
                 createdComment.getUser().getUsername(),
                 createdComment.getUpdatedAt());
+    }
+
+    public Page<CommentResponseDto> findAll (Pageable pageable) {
+        return commentRepository.findAll(pageable).map(Comment::toDto);
     }
 }

@@ -1,12 +1,11 @@
 package com.example.scheduledevelop.dto;
 
-import com.example.scheduledevelop.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CommentRequestDto {
+public class CreateCommentRequestDto {
 
     private Long schedule_id;
 
