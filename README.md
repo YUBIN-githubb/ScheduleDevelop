@@ -17,3 +17,6 @@
 | 로그인   | POST   | `/users/login`    | `{ "email" : "yubin@example.com", "password" : "abcd"}`                       | `{ "id" : 1, "username" : "yubin" }, 세션값`                                                                                                                   | 200 OK      |
 | 로그아웃  | POST   | `/users/logout`   | 세션값                                                                           | 없음                                                                                                                                                          | 200 OK      |
 
+# ERD
+![ERD](img.png)
+
